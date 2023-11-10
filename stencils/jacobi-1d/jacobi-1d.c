@@ -61,7 +61,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_jacobi_1d(int tsteps,
+void kernel_jacobi_1d[[gnu::flatten, gnu::noinline]](int tsteps,
 			    int n,
 			    DATA_TYPE POLYBENCH_1D(A,N,n),
 			    DATA_TYPE POLYBENCH_1D(B,N,n))

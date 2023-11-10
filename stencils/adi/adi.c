@@ -38,9 +38,10 @@ void init_array (int n,
 
 /* DCE code. Must scan the entire live-out data.
    Can be used also to check the correctness of the output. */
-static
+ 
+static 
 void print_array(int n,
-		 DATA_TYPE POLYBENCH_2D(u,N,N,n,n))
+		 DATA_TYPE POLYBENCH_2D(u,N,N,n,n)) 
 
 {
   int i, j;
@@ -64,7 +65,7 @@ void print_array(int n,
  * by Peizong Lee and Zvi Meir Kedem, TOPLAS, 2002
  */
 static
-void kernel_adi(int tsteps, int n,
+void kernel_adi[[gnu::flatten, gnu::noinline]](int tsteps, int n,
 		DATA_TYPE POLYBENCH_2D(u,N,N,n,n),
 		DATA_TYPE POLYBENCH_2D(v,N,N,n,n),
 		DATA_TYPE POLYBENCH_2D(p,N,N,n,n),

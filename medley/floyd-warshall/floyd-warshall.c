@@ -61,7 +61,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_floyd_warshall(int n,
+void kernel_floyd_warshall[[gnu::flatten, gnu::noinline]](int n,
 			   DATA_TYPE POLYBENCH_2D(path,N,N,n,n))
 {
   int i, j, k;

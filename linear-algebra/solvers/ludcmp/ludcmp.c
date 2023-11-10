@@ -91,7 +91,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_ludcmp(int n,
+void kernel_ludcmp[[gnu::flatten, gnu::noinline]](int n,
 		   DATA_TYPE POLYBENCH_2D(A,N,N,n,n),
 		   DATA_TYPE POLYBENCH_1D(b,N,n),
 		   DATA_TYPE POLYBENCH_1D(x,N,n),

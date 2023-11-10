@@ -76,7 +76,7 @@ void print_array(int m, int n,
 /* QR Decomposition with Modified Gram Schmidt:
  http://www.inf.ethz.ch/personal/gander/ */
 static
-void kernel_gramschmidt(int m, int n,
+void kernel_gramschmidt[[gnu::flatten, gnu::noinline]](int m, int n,
 			DATA_TYPE POLYBENCH_2D(A,M,N,m,n),
 			DATA_TYPE POLYBENCH_2D(R,N,N,n,n),
 			DATA_TYPE POLYBENCH_2D(Q,M,N,m,n))

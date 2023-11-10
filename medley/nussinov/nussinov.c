@@ -77,7 +77,7 @@ void print_array(int n,
   based on algorithm by Nussinov, described in Allison Lake's senior thesis.
 */
 static
-void kernel_nussinov(int n, base POLYBENCH_1D(seq,N,n),
+void kernel_nussinov[[gnu::flatten, gnu::noinline]](int n, base POLYBENCH_1D(seq,N,n),
 			   DATA_TYPE POLYBENCH_2D(table,N,N,n,n))
 {
   int i, j, k;

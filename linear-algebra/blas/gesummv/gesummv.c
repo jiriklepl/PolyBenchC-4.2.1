@@ -68,7 +68,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_gesummv(int n,
+void kernel_gesummv[[gnu::flatten, gnu::noinline]](int n,
 		    DATA_TYPE alpha,
 		    DATA_TYPE beta,
 		    DATA_TYPE POLYBENCH_2D(A,N,N,n,n),

@@ -69,7 +69,7 @@ void print_array(int ni, int nj,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_gemm(int ni, int nj, int nk,
+void kernel_gemm[[gnu::flatten, gnu::noinline]](int ni, int nj, int nk,
 		 DATA_TYPE alpha,
 		 DATA_TYPE beta,
 		 DATA_TYPE POLYBENCH_2D(C,NI,NJ,ni,nj),

@@ -64,7 +64,7 @@ void print_array(int w, int h,
    including the call and return. */
 /* Original code provided by Gael Deest */
 static
-void kernel_deriche(int w, int h, DATA_TYPE alpha,
+void kernel_deriche[[gnu::flatten, gnu::noinline]](int w, int h, DATA_TYPE alpha,
        DATA_TYPE POLYBENCH_2D(imgIn, W, H, w, h),
        DATA_TYPE POLYBENCH_2D(imgOut, W, H, w, h),
        DATA_TYPE POLYBENCH_2D(y1, W, H, w, h),

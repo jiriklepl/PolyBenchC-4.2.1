@@ -62,7 +62,7 @@ void print_array(int nr, int nq, int np,
 
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
-void kernel_doitgen(int nr, int nq, int np,
+void kernel_doitgen[[gnu::flatten, gnu::noinline]](int nr, int nq, int np,
 		    DATA_TYPE POLYBENCH_3D(A,NR,NQ,NP,nr,nq,np),
 		    DATA_TYPE POLYBENCH_2D(C4,NP,NP,np,np),
 		    DATA_TYPE POLYBENCH_1D(sum,NP,np))

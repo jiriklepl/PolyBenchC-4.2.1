@@ -61,7 +61,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_heat_3d(int tsteps,
+void kernel_heat_3d[[gnu::flatten, gnu::noinline]](int tsteps,
 		      int n,
 		      DATA_TYPE POLYBENCH_3D(A,N,N,N,n,n,n),
 		      DATA_TYPE POLYBENCH_3D(B,N,N,N,n,n,n))

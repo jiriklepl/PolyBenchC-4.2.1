@@ -87,7 +87,7 @@ void print_array(int nx,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_fdtd_2d(int tmax,
+void kernel_fdtd_2d[[gnu::flatten, gnu::noinline]](int tmax,
 		    int nx,
 		    int ny,
 		    DATA_TYPE POLYBENCH_2D(ex,NX,NY,nx,ny),

@@ -65,7 +65,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_syrk(int n, int m,
+void kernel_syrk[[gnu::flatten, gnu::noinline]](int n, int m,
 		 DATA_TYPE alpha,
 		 DATA_TYPE beta,
 		 DATA_TYPE POLYBENCH_2D(C,N,N,n,n),

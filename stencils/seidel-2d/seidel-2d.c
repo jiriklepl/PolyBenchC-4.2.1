@@ -58,7 +58,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_seidel_2d(int tsteps,
+void kernel_seidel_2d[[gnu::flatten, gnu::noinline]](int tsteps,
 		      int n,
 		      DATA_TYPE POLYBENCH_2D(A,N,N,n,n))
 {

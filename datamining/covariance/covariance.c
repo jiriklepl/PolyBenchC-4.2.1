@@ -61,7 +61,7 @@ void print_array(int m,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_covariance(int m, int n,
+void kernel_covariance[[gnu::flatten, gnu::noinline]](int m, int n,
 		       DATA_TYPE float_n,
 		       DATA_TYPE POLYBENCH_2D(data,N,M,n,m),
 		       DATA_TYPE POLYBENCH_2D(cov,M,M,m,m),

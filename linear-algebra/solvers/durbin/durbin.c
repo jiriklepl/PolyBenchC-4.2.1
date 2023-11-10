@@ -58,7 +58,7 @@ void print_array(int n,
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 static
-void kernel_durbin(int n,
+void kernel_durbin[[gnu::flatten, gnu::noinline]](int n,
 		   DATA_TYPE POLYBENCH_1D(r,N,n),
 		   DATA_TYPE POLYBENCH_1D(y,N,n))
 {
