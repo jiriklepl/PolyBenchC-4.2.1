@@ -76,7 +76,7 @@ void kernel_gemm[[gnu::flatten, gnu::noinline]](int ni, int nj, int nk,
 		 DATA_TYPE POLYBENCH_2D(A,NI,NK,ni,nk),
 		 DATA_TYPE POLYBENCH_2D(B,NK,NJ,nk,nj))
 {
-  int i, j, k;
+  int i, j, k, I, K;
 
 //BLAS PARAMS
 //TRANSA = 'N'
@@ -86,14 +86,13 @@ void kernel_gemm[[gnu::flatten, gnu::noinline]](int ni, int nj, int nk,
 //B is NKxNJ
 //C is NIxNJ
 #pragma scop
-  for (i = 0; i < _PB_NI; i++) {
+  for (i = 0; i < _PB_NI; i++)
     for (j = 0; j < _PB_NJ; j++)
 	C[i][j] *= beta;
-    for (k = 0; k < _PB_NK; k++) {
+  for (i = 0; i < _PB_NI; i++)
+    for (k = 0; k < _PB_NK; k++)
        for (j = 0; j < _PB_NJ; j++)
 	  C[i][j] += alpha * A[i][k] * B[k][j];
-    }
-  }
 #pragma endscop
 
 }

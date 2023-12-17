@@ -84,6 +84,9 @@ void kernel_gesummv[[gnu::flatten, gnu::noinline]](int n,
     {
       tmp[i] = SCALAR_VAL(0.0);
       y[i] = SCALAR_VAL(0.0);
+    }
+  for (i = 0; i < _PB_N; i++)
+    {
       for (j = 0; j < _PB_N; j++)
 	{
 	  tmp[i] = A[i][j] * x[j] + tmp[i];
