@@ -82,22 +82,25 @@ void kernel_2mm[[gnu::flatten, gnu::noinline]](int ni, int nj, int nk, int nl,
 		DATA_TYPE POLYBENCH_2D(C,NJ,NL,nj,nl),
 		DATA_TYPE POLYBENCH_2D(D,NI,NL,ni,nl))
 {
-  int i, j, k;
+  int i, j, k, I, J;
 
 #pragma scop
   /* D := alpha*A*B*C + beta*D */
   for (i = 0; i < _PB_NI; i++)
     for (j = 0; j < _PB_NJ; j++)
 	tmp[i][j] = SCALAR_VAL(0.0);
-  for (i = 0; i < _PB_NI; i++)
-    for (j = 0; j < _PB_NJ; j++)
+  for (I = 0; I < _PB_NI; I+=32)
+  for (J = 0; J < _PB_NJ; J+=2)
+  for (i = I; i < I+32 && i < _PB_NI; i++)
+    for (j = J; j < J+2 && j < _PB_NJ; j++)
 	    for (k = 0; k < _PB_NK; ++k)
 	  tmp[i][j] += alpha * A[i][k] * B[k][j];
   for (i = 0; i < _PB_NI; i++)
     for (j = 0; j < _PB_NL; j++)
 	D[i][j] *= beta;
+  for (J = 0; J < _PB_NL; J+=32)
   for (i = 0; i < _PB_NI; i++)
-    for (j = 0; j < _PB_NL; j++)
+    for (j = J; j < J + 32 && j < _PB_NL; j++)
 	    for (k = 0; k < _PB_NJ; ++k)
 	  D[i][j] += tmp[i][k] * C[k][j];
 #pragma endscop

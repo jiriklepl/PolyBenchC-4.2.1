@@ -89,8 +89,10 @@ void kernel_gemm[[gnu::flatten, gnu::noinline]](int ni, int nj, int nk,
   for (i = 0; i < _PB_NI; i++)
     for (j = 0; j < _PB_NJ; j++)
 	C[i][j] *= beta;
-  for (i = 0; i < _PB_NI; i++)
-    for (k = 0; k < _PB_NK; k++)
+  for (I = 0; I < _PB_NI; I+=16)
+  for (K = 0; K < _PB_NK; K+=2)
+  for (i = I; i < I + 16 && i < _PB_NI; i++)
+    for (k = K; k < K + 2 && k < _PB_NK; k++)
        for (j = 0; j < _PB_NJ; j++)
 	  C[i][j] += alpha * A[i][k] * B[k][j];
 #pragma endscop
