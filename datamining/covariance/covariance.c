@@ -67,7 +67,7 @@ void kernel_covariance[[gnu::flatten, gnu::noinline]](int m, int n,
 		       DATA_TYPE POLYBENCH_2D(cov,M,M,m,m),
 		       DATA_TYPE POLYBENCH_1D(mean,M,m))
 {
-  int i, j, k;
+  int i, j, k, I, K;
 
 #pragma scop
   for (j = 0; j < _PB_M; j++)
@@ -85,9 +85,11 @@ void kernel_covariance[[gnu::flatten, gnu::noinline]](int m, int n,
   for (i = 0; i < _PB_M; i++)
     for (j = i; j < _PB_M; j++)
       cov[i][j] = SCALAR_VAL(0.0);
-  for (i = 0; i < _PB_M; i++)
-    for (j = i; j < _PB_M; j++)
-      for (k = 0; k < _PB_N; k++)
+  for (I = 0; I < _PB_M; I+=8)
+  for (K = 0; K < _PB_N; K+=16)
+  for (i = I; i < I + 8 && i < _PB_M; i++)
+    for (k = K; k < K + 16 && k < _PB_N; k++)
+      for (j = i; j < _PB_M; j++)
 	      cov[i][j] += data[k][i] * data[k][j];
   for (i = 0; i < _PB_M; i++)
     for (j = i; j < _PB_M; j++)
