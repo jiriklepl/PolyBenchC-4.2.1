@@ -42,20 +42,22 @@ add_executable(adi stencils/adi/adi.c utilities/polybench.c)
 
 # TBB
 
-find_package(TBB REQUIRED tbb)
+if (RUN_TBB)
+    find_package(TBB REQUIRED tbb)
 
-# datamining
-add_executable(covariance-tbb datamining/covariance/covariance-tbb.cpp utilities/polybench.c)
-target_link_libraries(covariance-tbb tbb)
+    # datamining
+    add_executable(covariance-tbb datamining/covariance/covariance-tbb.cpp utilities/polybench.c)
+    target_link_libraries(covariance-tbb tbb)
 
-# linear-algebra - blas
-add_executable(syr2k-tbb linear-algebra/blas/syr2k/syr2k-tbb.cpp utilities/polybench.c)
-target_link_libraries(syr2k-tbb tbb)
+    # linear-algebra - blas
+    add_executable(syr2k-tbb linear-algebra/blas/syr2k/syr2k-tbb.cpp utilities/polybench.c)
+    target_link_libraries(syr2k-tbb tbb)
 
-# linear-algebra - kernels
-add_executable(2mm-tbb linear-algebra/kernels/2mm/2mm-tbb.cpp utilities/polybench.c)
-target_link_libraries(2mm-tbb tbb)
+    # linear-algebra - kernels
+    add_executable(2mm-tbb linear-algebra/kernels/2mm/2mm-tbb.cpp utilities/polybench.c)
+    target_link_libraries(2mm-tbb tbb)
 
-# stencils
-add_executable(heat-3d-tbb stencils/heat-3d/heat-3d-tbb.cpp utilities/polybench.c)
-target_link_libraries(heat-3d-tbb tbb)
+    # stencils
+    add_executable(heat-3d-tbb stencils/heat-3d/heat-3d-tbb.cpp utilities/polybench.c)
+    target_link_libraries(heat-3d-tbb tbb)
+endif()
