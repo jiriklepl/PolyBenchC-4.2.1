@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(PolybenchC VERSION 4.2.1 LANGUAGES C)
+project(PolybenchC VERSION 4.2.1 LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED True)
@@ -39,3 +39,23 @@ add_executable(jacobi-2d stencils/jacobi-2d/jacobi-2d.c utilities/polybench.c)
 add_executable(seidel-2d stencils/seidel-2d/seidel-2d.c utilities/polybench.c)
 add_executable(heat-3d stencils/heat-3d/heat-3d.c utilities/polybench.c)
 add_executable(adi stencils/adi/adi.c utilities/polybench.c)
+
+# TBB
+
+find_package(TBB REQUIRED tbb)
+
+# datamining
+add_executable(covariance-tbb datamining/covariance/covariance-tbb.cpp utilities/polybench.c)
+target_link_libraries(covariance-tbb tbb)
+
+# linear-algebra - blas
+add_executable(syr2k-tbb linear-algebra/blas/syr2k/syr2k-tbb.cpp utilities/polybench.c)
+target_link_libraries(syr2k-tbb tbb)
+
+# linear-algebra - kernels
+add_executable(2mm-tbb linear-algebra/kernels/2mm/2mm-tbb.cpp utilities/polybench.c)
+target_link_libraries(2mm-tbb tbb)
+
+# stencils
+add_executable(heat-3d-tbb stencils/heat-3d/heat-3d-tbb.cpp utilities/polybench.c)
+target_link_libraries(heat-3d-tbb tbb)
