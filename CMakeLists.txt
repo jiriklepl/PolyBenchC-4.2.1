@@ -43,7 +43,9 @@ add_executable(adi stencils/adi/adi.c utilities/polybench.c)
 # TBB
 
 if (RUN_TBB)
-    find_package(TBB REQUIRED tbb)
+    if (DEFINED ENV{TBBROOT})
+        link_directories($ENV{TBBROOT}/lib)
+    endif ()
 
     # datamining
     add_executable(covariance-tbb datamining/covariance/covariance-tbb.cpp utilities/polybench.c)
